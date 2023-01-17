@@ -59,4 +59,4 @@ def ndz():
         if is_violate(drone)
     }
     ndz_violate_drones.update(drones)
-    return ndz_violate_drones
+    return list(ndz_violate_drones.values())
