@@ -84,7 +84,7 @@ def ndz():
         ndz_violate_drones[serial]["time"] = now
 
     for serial, drone in list(ndz_violate_drones.items()):
-        if now - drone["time"] > timedelta(seconds=10):
+        if now - drone["time"] > timedelta(minutes=10):
             del ndz_violate_drones[serial]
 
     return list(ndz_violate_drones.values())
