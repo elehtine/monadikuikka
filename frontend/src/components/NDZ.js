@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { getNDZViolateDrones } from './services/birdnest';
+import { getNDZViolateDrones } from '../services/birdnest';
 
 const NDZ = () => {
   const { isLoading, isError, data, error } = useQuery('ndz', getNDZViolateDrones);
@@ -22,8 +22,6 @@ const NDZ = () => {
   }
 
   const drones = data.data;
-  console.log(drones);
-
 
   return (
     <TableContainer component={Paper}>

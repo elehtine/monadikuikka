@@ -1,8 +1,8 @@
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
-import Radar from './Radar';
-import NDZ from './NDZ';
+import Radar from './components/Radar';
+import NDZ from './components/NDZ';
 
 
 const App = () => (

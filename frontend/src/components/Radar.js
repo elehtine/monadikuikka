@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { getDrones } from './services/birdnest';
+import { getDrones } from '../services/birdnest';
 
 const Drone = ({ drone }) => (
   <circle cx={drone.x / 1000} cy={drone.y / 1000} r='5' fill='red' />
