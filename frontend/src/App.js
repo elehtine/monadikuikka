@@ -6,7 +6,7 @@ import NDZ from './components/NDZ';
 
 
 const App = () => (
-  <Container maxWidth="sm">
+  <Container maxWidth="md">
     <Box sx={{ my: 4 }}>
       <Radar />
       <NDZ />

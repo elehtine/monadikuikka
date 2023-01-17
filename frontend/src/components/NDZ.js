@@ -35,8 +35,8 @@ const NDZ = () => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
-            <TableCell>Phone</TableCell>
-            <TableCell>Closest Distance</TableCell>
+            <TableCell align="right">Phone</TableCell>
+            <TableCell align="right">Closest Distance (meters)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -49,8 +49,8 @@ const NDZ = () => {
                 {`${pilot.firstName} ${pilot.lastName}`}
               </TableCell>
               <TableCell>{pilot.email}</TableCell>
-              <TableCell>{pilot.phoneNumber}</TableCell>
-              <TableCell>{pilot.distance}</TableCell>
+              <TableCell align="right">{pilot.phoneNumber}</TableCell>
+              <TableCell align="right">{Math.round(pilot.distance)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
