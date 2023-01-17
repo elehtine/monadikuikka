@@ -21,29 +21,31 @@ const NDZ = () => {
     return error;
   }
 
-  const drones = data.data;
+  const pilots = data.data;
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Serial Number</TableCell>
-            <TableCell align="right">x-coordinate</TableCell>
-            <TableCell align="right">y-coordinate</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Phone</TableCell>
+            <TableCell>Closest Distance</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {drones.map((drone, index) => (
+          {pilots.map((pilot, index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {drone.serial}
+                {`${pilot.firstName} ${pilot.lastName}`}
               </TableCell>
-              <TableCell align="right">{drone.x}</TableCell>
-              <TableCell align="right">{drone.y}</TableCell>
+              <TableCell>{pilot.email}</TableCell>
+              <TableCell>{pilot.phoneNumber}</TableCell>
+              <TableCell>{pilot.distance}</TableCell>
             </TableRow>
           ))}
         </TableBody>
