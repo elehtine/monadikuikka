@@ -6,11 +6,11 @@ const getDrones = () => (
   axios.get(url)
 );
 
-const getNDZViolateDrones = () => (
-  axios.get(`${url}/ndz`)
+const getViolatePilots = () => (
+  axios.get(`${url}/pilots`)
 );
 
 export {
   getDrones,
-  getNDZViolateDrones,
+  getViolatePilots,
 };

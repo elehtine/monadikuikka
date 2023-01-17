@@ -3,6 +3,9 @@ import xml.etree.ElementTree as ET
 import json
 from math import sqrt
 
+import datetime
+from datetime import timedelta
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -61,20 +64,27 @@ def root():
     return fetch_drones()
 
 
-@app.get("/ndz")
+@app.get("/pilots")
 def ndz():
     drones = fetch_drones()
-    violate_drones = {
+    current_violate_drones = {
         drone["serial"]: drone
         for drone in drones
         if drone["distance"] < 100
     }
 
-    for serial, drone in violate_drones.items():
+
+    now = datetime.datetime.now()
+    for serial, drone in current_violate_drones.items():
         if serial not in ndz_violate_drones:
             drone.update(fetch_pilot(serial))
             ndz_violate_drones[serial] = drone
         elif drone["distance"] < ndz_violate_drones[serial]["distance"]:
             ndz_violate_drones[serial]["distance"] = drone["distance"]
+        ndz_violate_drones[serial]["time"] = now
+
+    for serial, drone in list(ndz_violate_drones.items()):
+        if now - drone["time"] > timedelta(seconds=10):
+            del ndz_violate_drones[serial]
 
     return list(ndz_violate_drones.values())

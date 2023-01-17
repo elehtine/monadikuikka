@@ -7,7 +7,12 @@ const Drone = ({ drone }) => (
 );
 
 const Radar = () => {
-  const { isLoading, isError, data, error } = useQuery('drones', getDrones);
+  const {
+    isLoading,
+    isError,
+    data,
+    error,
+  } = useQuery('drones', getDrones, { refetchInterval: 2000 });
 
   if (isLoading) {
     return "Loading...";
