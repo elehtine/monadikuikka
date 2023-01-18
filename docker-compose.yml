@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+
+  backend:
+    image: ghcr.io/elehtine/monadikuikka/backend:main
+    environment:
+      MODE: "production"
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monadikuikka.rule=Host(`monadikuikka.hellsha.de`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.monadikuikka.tls=true"
+      - "traefik.http.routers.monadikuikka.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.monadikuikka-api-strip.stripprefix.prefixes=/api"
+      - "traefik.http.routers.monadikuikka.middlewares=monadikuikka-api-strip@docker"
+
+  frontend:
+    image: ghcr.io/elehtine/monadikuikka/frontend:main
+    depends_on:
+      - backend
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monadikuikka-front.rule=Host(`monadikuikka.hellsha.de`)"
+      - "traefik.http.routers.monadikuikka-front.tls=true"
+      - "traefik.http.routers.monadikuikka-front.tls.certresolver=letsencrypt"
+
+networks:
+  web:
+    external:
+      name: traefiknet

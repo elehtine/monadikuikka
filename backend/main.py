@@ -2,27 +2,31 @@ import requests
 import xml.etree.ElementTree as ET
 import json
 from math import sqrt
+import os
 
 import datetime
 from datetime import timedelta
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if os.getenv("MODE", "dev") == "dev":
+    from fastapi.middleware.cors import CORSMiddleware
+
+    origins = [
+        "http://localhost:3000",
+    ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 ndz_violate_drones = {}
